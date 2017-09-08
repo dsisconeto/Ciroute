@@ -1,0 +1,17 @@
+{
+    "name": "dsisconeto/ciroute",
+    "description": "CodeIgniter Route System",
+    "authors": [
+        {
+            "name": "Dejar Sisconeto",
+            "email": "dejairsisconeto23@gmail.com",
+            "role": "PHP Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "DSisconeto\\Ciroute\\": "src/"
+        }
+    },
+    "license": "MIT"
+}
