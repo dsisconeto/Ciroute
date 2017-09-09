@@ -31,7 +31,9 @@ class Ciroute
         }
         $content =  "<?php \n defined('BASEPATH') or exit('No direct script access allowed');\n";
         foreach ($routes as $route) {
-            $content .= '$route["'.$route["route"].'"] = "' .$route["controller"]."\"; \n";
+            $content .= '$route["'.$route["route"].'"]';
+            $content .= $route["method"] != 'ANY'? '["'.$route['method'].'"]': '';
+            $content .= '="' .$route["controller"]."\"; \n";
         }
             fwrite($file, $content);
             fclose($file);

@@ -4,20 +4,24 @@ namespace DSisconeto\Ciroute;
 
 class Group
 {
-
     private static $group =[
         "prefix" => [],
         "folder" => [],
         "controller"  =>null,
-        'name'=>[]
     ];
 
-    public static function setGroup($group)
+    public static function group($group, $closure)
+    {
+        self::setGroup($group);
+        $closure();
+        self::resetGroup($group);
+    }
+        
+    private static function setGroup($group)
     {
         if (!is_array($group)) {
             return;
         }
-        self::setName($group);
         self::setPrefix($group);
         self::setFolder($group);
         self::setController($group);
@@ -28,22 +32,6 @@ class Group
     {
         
         return ($route == "/" || $route == "");
-    }
-
-    public static function getName($name)
-    {
-        if (!self::$group["name"] && $name) {
-            return $name;
-        } elseif (!self::$group["name"] || !$name) {
-            return "";
-        }
-
-        $nameDefine = "";
-        foreach (self::$group["name"] as $name_temp) {
-            $nameDefine = $nameDefine ? "$nameDefine.$name_temp" : $name_temp;
-        }
-
-        return $nameDefine.".".$name;
     }
 
 
@@ -88,26 +76,13 @@ class Group
 
         return $controller ? "$folderDefine/$controller": folderDefine;
     }
-
-
    
-    public static function resetGroup($group)
+    private static function resetGroup($group)
     {
         self::resetPrefix($group);
         self::resetController();
         self::resetFolder($group);
-        self::resetName();
-    }
 
-    private static function resetName()
-    {
-        if (!isset($group['name'])) {
-            return;
-        }
-        $count = count(self::$group["name"])-1;
-        if (isset(self::$group["name"][$count])) {
-                unset(self::$group["name"][$count]);
-        }
     }
 
     private static function resetPrefix($group)
@@ -130,22 +105,12 @@ class Group
                 unset(self::$group["folder"][$count]);
         }
     }
-
     
     private static function resetController()
     {
         self::$group["controller"]  = null;
     }
 
-
-
-    private static function setName($group)
-    {
-        if (!isset($group["name"])) {
-            return;
-        }
-        self::$group["name"][] = $group["name"];
-    }
 
     private static function setPrefix($group)
     {
@@ -163,7 +128,6 @@ class Group
         }
             self::$group["folder"][]  = $group["folder"];
     }
-
     
     public static function setController($group)
     {
