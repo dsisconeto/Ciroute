@@ -49,7 +49,7 @@ class Ciroute
         $routes = Route::get_routes();
         $content =  "<?php \n";
         foreach ($routes as $route) {
-            if ($route["name"]) {
+            if (isset($route["name"])) {
                 $content .= '$routes_names["'.$route["name"].'"] = "' .$route["route"]."\"; \n";
             }
         }
