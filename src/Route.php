@@ -8,19 +8,19 @@ class Route
             'controller'=>'welcome',
             'route'=>'default_controller',
             'name'=>'index',
-            'method' =>'get',
+            'method' =>'ANY',
         ],
         1=>  [
             'controller'=>'',
             'route'=>'404_override',
             'name'=>'404_override',
-            'method' =>'get',
+            'method' =>'ANY',
         ],
         2=>  [
             'controller'=>false,
             'route'=>'translate_uri_dashes',
             'name'=>'',
-            'method' =>'get',
+            'method' =>'ANY',
         ],
 
     ];
@@ -123,7 +123,7 @@ class Route
             throw new Exception("Rota reservada");
         }
 
-        if (isset(self::$route[$route])) {
+        if (isset(self::$routes[$route])) {
             throw new Exception("Rota Já registrada");
         }
     }

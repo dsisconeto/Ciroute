@@ -17,9 +17,9 @@ if (ENVIRONMENT == 'development') {
     require_once(__DIR__.'/vendor/autoload.php');
     
     new \DSisconeto\Ciroute\Ciroute(
-        __DIR__."/$application_folder/config/routes.php",
-        __DIR__."/$application_folder/cache/",
-        __DIR__."/$application_folder/routes/"
+        __DIR__."/application/config/routes.php",
+        __DIR__."/application/cache/",
+        __DIR__."/application/routes/"
         );
     }
 ```
