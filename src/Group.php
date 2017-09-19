@@ -4,10 +4,10 @@ namespace DSisconeto\Ciroute;
 
 class Group
 {
-    private static $group =[
+    private static $group = [
         "prefix" => [],
         "folder" => [],
-        "controller"  =>null,
+        "controller" => null,
     ];
 
     public static function group($group, $closure)
@@ -16,7 +16,7 @@ class Group
         $closure();
         self::resetGroup($group);
     }
-        
+
     private static function setGroup($group)
     {
         if (!is_array($group)) {
@@ -27,10 +27,10 @@ class Group
         self::setController($group);
     }
 
-    
+
     private static function verifyRoot($route)
     {
-        
+
         return ($route == "/" || $route == "");
     }
 
@@ -46,17 +46,17 @@ class Group
 
         $prefixDefine = "";
         foreach (self::$group["prefix"] as $prefix) {
-            $prefixDefine = $prefixDefine ? "$prefixDefine/$prefix":$prefix;
+            $prefixDefine = $prefixDefine ? "$prefixDefine/$prefix" : $prefix;
         }
 
 
-        return self::verifyRoot($route) || !$route ? $prefixDefine: $prefixDefine."/$route";
+        return self::verifyRoot($route) || !$route ? $prefixDefine : $prefixDefine . "/$route";
     }
 
     public static function getController($controller)
     {
         if (self::$group["controller"]) {
-            $controller = self::$group["controller"]."/$controller";
+            $controller = self::$group["controller"] . "/$controller";
         }
         return $controller;
     }
@@ -71,12 +71,12 @@ class Group
 
         $folderDefine = "";
         foreach (self::$group["folder"] as $folder) {
-            $folderDefine = $folderDefine? "$folderDefine/$folder":  $folder;
+            $folderDefine = $folderDefine ? "$folderDefine/$folder" : $folder;
         }
 
-        return $controller ? "$folderDefine/$controller": folderDefine;
+        return $controller ? "$folderDefine/$controller" : $folderDefine;
     }
-   
+
     private static function resetGroup($group)
     {
         self::resetPrefix($group);
@@ -90,31 +90,32 @@ class Group
         if (!isset($group['prefix'])) {
             return;
         }
-        $count = count(self::$group["prefix"])-1;
+        $count = count(self::$group["prefix"]) - 1;
         if (isset(self::$group["prefix"][$count])) {
-                unset(self::$group["prefix"][$count]);
+            unset(self::$group["prefix"][$count]);
         }
     }
-    private static function resetFolder()
+
+    private static function resetFolder($folder)
     {
-        if (!isset($group['folder'])) {
+        if (!isset($folder)) {
             return;
         }
-        $count = count(self::$group["folder"])-1;
+        $count = count(self::$group["folder"]) - 1;
         if (isset(self::$group["folder"][$count])) {
-                unset(self::$group["folder"][$count]);
+            unset(self::$group["folder"][$count]);
         }
     }
-    
+
     private static function resetController()
     {
-        self::$group["controller"]  = null;
+        self::$group["controller"] = null;
     }
 
 
     private static function setPrefix($group)
     {
-    
+
         if (!isset($group["prefix"])) {
             return;
         }
@@ -126,14 +127,14 @@ class Group
         if (!isset($group["folder"])) {
             return;
         }
-            self::$group["folder"][]  = $group["folder"];
+        self::$group["folder"][] = $group["folder"];
     }
-    
+
     public static function setController($group)
     {
         if (!isset($group["controller"])) {
             return;
         }
-        self::$group["controller"]  = $group["controller"];
+        self::$group["controller"] = $group["controller"];
     }
 }
