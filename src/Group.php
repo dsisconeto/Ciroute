@@ -87,18 +87,22 @@ class Group
 
     private static function resetPrefix($group)
     {
+
+
         if (!isset($group['prefix'])) {
             return;
+
         }
         $count = count(self::$group["prefix"]) - 1;
+
         if (isset(self::$group["prefix"][$count])) {
             unset(self::$group["prefix"][$count]);
         }
     }
 
-    private static function resetFolder($folder)
+    private static function resetFolder($group)
     {
-        if (!isset($folder)) {
+        if (!isset($group['folder'])) {
             return;
         }
         $count = count(self::$group["folder"]) - 1;
@@ -119,7 +123,7 @@ class Group
         if (!isset($group["prefix"])) {
             return;
         }
-        self::$group["prefix"][] = $group["prefix"];
+        self::$group["prefix"][count(self::$group["prefix"])] = $group["prefix"];
     }
 
     public static function setFolder($group)
@@ -127,7 +131,7 @@ class Group
         if (!isset($group["folder"])) {
             return;
         }
-        self::$group["folder"][] = $group["folder"];
+        self::$group["folder"][count(self::$group["folder"])] = $group["folder"];
     }
 
     public static function setController($group)

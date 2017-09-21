@@ -108,7 +108,7 @@ class Route
 
     /**
      * @param array $group ['prefix'=>'', 'controller'=>'', 'folder'=>'']
-     * @param array $closure
+     * @param \Closure $closure
      */
 
     public static function group($group, $closure)
@@ -120,11 +120,11 @@ class Route
     private static function validateRoute($route)
     {
         if (isset(self::$routes_reservard[$route])) {
-            throw new Exception("Rota reservada");
+            throw new \Exception("Rota reservada");
         }
 
         if (isset(self::$routes[$route])) {
-            throw new Exception("Rota Já registrada");
+            throw new \Exception("Rota Já registrada");
         }
     }
 

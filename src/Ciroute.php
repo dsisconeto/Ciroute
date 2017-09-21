@@ -27,7 +27,7 @@ class Ciroute
         $routes = Route::get_routes();
         
         if (!$routes) {
-            return;
+            return null;
         }
         $content =  "<?php \n defined('BASEPATH') or exit('No direct script access allowed');\n";
         foreach ($routes as $route) {
